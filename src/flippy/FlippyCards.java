@@ -91,22 +91,17 @@ public class FlippyCards {
 	 */
 	public int faceUpTotal(){
 		
-		int redCardsValue = 0; //intializing red card total values to 0
-		int blackCardsValue = 0; //initializing black card total values to 0
-		
+		// int redCardsValue = 0; //intializing red card total values to 0
+		// int blackCardsValue = 0; //initializing black card total values to 0
+		int faceUpTotal = 0;
 	
 		for (Card card : cards) { //cycling through every card 
 			if (card.isFaceUp()) { //checking if the card is faced up
-				if (card.isRedCard()) { //if its a red card, adds to the total red card value
-					redCardsValue += card.getFlippyCardValue();
-			}
-				else { //if its a black card, subtracts from the total black card value (should be a negative number)
-					blackCardsValue -= card.getFlippyCardValue();
-				}
+				faceUpTotal += card.getFlippyCardValue(); //adding card value
 			}
 			
 		}
-		return redCardsValue + blackCardsValue; //adding together the total values of both to get the total flippy card score for faceup cards
+		return faceUpTotal; //returning face up total
 	}
 
 	/**
@@ -116,9 +111,20 @@ public class FlippyCards {
 	 * @return the flippy card score for facedown cards
 	 */
 	public int faceDownTotal(){
-		//TODO: Fill in good stuff here!
-		return 0;
-	}
+		
+		int hiddenTotal = 0; //initializing variable to track score of all the cards in the game
+		int faceUpTotal = 0; //initializing variable to track score of face up cards only
+	
+		for (Card card : cards) { //cycling through every card 
+				hiddenTotal += card.getFlippyCardValue(); //adding every card to the overall game total
+				if (card.isFaceUp()) { //checking if the card is faced up, adding value to total for face up cards  
+					faceUpTotal += card.getFlippyCardValue(); 
+			}
+				}
+				return hiddenTotal - faceUpTotal; //returning difference to find face down cards total
+			}
+
+
 
 
 	//TODO: Add a toString method here!
@@ -144,13 +150,18 @@ public class FlippyCards {
 		//FLIPPING CARDS TO TEST faceUpTotal
 		flippyCards.getCard(1).flip();
 		flippyCards.getCard(2).flip();
-		flippyCards.getCard(3).flip();
-		flippyCards.getCard(4).flip();
+		// flippyCards.getCard(3).flip();
+		// flippyCards.getCard(4).flip();
 		//TESTING faceUpTotal
-		System.out.println(flippyCards.faceUpTotal());
+		System.out.println("Face up total score: " + flippyCards.faceUpTotal());
 
 		//TESTING calculateOptimalScore method
-		System.out.println(flippyCards.calculateOptimalScore());
+		System.out.println("Optimal score: " + flippyCards.calculateOptimalScore());
+
+		//TESTING faceDownTotal
+		System.out.println("Face down total score " + flippyCards.faceDownTotal());
+
+
 
 
 		

@@ -129,13 +129,30 @@ public class Card {
 	 */
 	public int getFlippyCardValue(){
 		if (number == 1) { ///if the number is 1, its an ace and should return the value of 11 in the game
-			return 11;
+			if (suit == "hearts" || suit == "diamonds") {
+				return 11;
+			}
+			else {
+				return -11;
+			}
+			
 		}
 		else if (number >= 11 && number <= 13) { // if the numbers are 11-13, they're face cards and return the value of 10 in the game
-			return 10;
+			if 	(suit == "hearts" || suit == "diamonds") {
+				return 10;
+			}
+			else {
+				return -10;
+			}
 		}
 		else { //otherwise, all other numbers return their own value in the game
-			return number;
+			if 	(suit == "hearts" || suit == "diamonds") {
+				return number;
+			}
+			else {
+				return -number;
+			}
+			
 		}
 
 	}
