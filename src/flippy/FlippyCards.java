@@ -15,7 +15,8 @@ import java.util.Random;
  *
  */
 public class FlippyCards {
-	private Card[] cards; // the cards for the game
+	public Card[] cards; // the cards for the game
+
 
 	/**
 	 * Create a new flippy card game state, which consists of the
@@ -44,10 +45,12 @@ public class FlippyCards {
 	/**
 	 * Returns the flippy card at the given index 
 	 * 
+	 * @param int index index of card being retrieved
+	 * 
 	 * @return the flippy card at the given index
 	 */
 	public Card getCard(int index) {
-		return cards[index]; 
+		return cards[index]; //returns card at given index
 	}
 	
 	/**
@@ -57,7 +60,8 @@ public class FlippyCards {
 	 * @param cardIndex the index of the card to flip over
 	 */
 	public void flipCard(int cardIndex) {
-		//TODO: Fill in good stuff here!
+		cards[cardIndex].flip(); //flipping card at index
+
 	}
 
 	/**
@@ -67,8 +71,15 @@ public class FlippyCards {
 	 * @return the optimal score
 	 */
 	public int calculateOptimalScore(){
-		//TODO: Fill in good stuff here!
-		return 0;
+		
+		int optimalScore = 0; //intializing total red card value to 0
+
+		for (Card card : cards) { //cycling through cards
+			if (card.isRedCard()) { //checking if its a red card (bc optimal score would only account for red cards since they bear positive score values)
+				optimalScore += card.getFlippyCardValue(); //adds the value of the card to the total red card value
+			}
+		}
+		return optimalScore; //returns the optimal score
 	}
 
 
@@ -79,8 +90,23 @@ public class FlippyCards {
 	 * @return the flippy card score for faceup cards
 	 */
 	public int faceUpTotal(){
-		//TODO: Fill in good stuff here!
-		return 0;
+		
+		int redCardsValue = 0; //intializing red card total values to 0
+		int blackCardsValue = 0; //initializing black card total values to 0
+		
+	
+		for (Card card : cards) { //cycling through every card 
+			if (card.isFaceUp()) { //checking if the card is faced up
+				if (card.isRedCard()) { //if its a red card, adds to the total red card value
+					redCardsValue += card.getFlippyCardValue();
+			}
+				else { //if its a black card, subtracts from the total black card value (should be a negative number)
+					blackCardsValue -= card.getFlippyCardValue();
+				}
+			}
+			
+		}
+		return redCardsValue + blackCardsValue; //adding together the total values of both to get the total flippy card score for faceup cards
 	}
 
 	/**
@@ -99,13 +125,36 @@ public class FlippyCards {
 
 
 	public static void main(String[] args) {
+
+		//TESTING FlippyCards method
 		FlippyCards flippyCards = new FlippyCards(5);
 
+		//TESTING getCard method
 		System.out.println(flippyCards.getCard(0));
 		System.out.println(flippyCards.getCard(1));
 		System.out.println(flippyCards.getCard(2));
 		System.out.println(flippyCards.getCard(3));
 		System.out.println(flippyCards.getCard(4));
+
+		//TESTING flipCard method
+		System.out.println(flippyCards.getCard(0).isFaceUp());
+		flippyCards.getCard(0).flip();
+		System.out.println(flippyCards.getCard(0).isFaceUp());
+
+		//FLIPPING CARDS TO TEST faceUpTotal
+		flippyCards.getCard(1).flip();
+		flippyCards.getCard(2).flip();
+		flippyCards.getCard(3).flip();
+		flippyCards.getCard(4).flip();
+		//TESTING faceUpTotal
+		System.out.println(flippyCards.faceUpTotal());
+
+		//TESTING calculateOptimalScore method
+		System.out.println(flippyCards.calculateOptimalScore());
+
+
 		
+
+
 	}
 }
