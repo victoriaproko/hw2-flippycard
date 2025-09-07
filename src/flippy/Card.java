@@ -42,7 +42,7 @@ public class Card {
 	}
 
 	/** 
-	 * @return the card's suite
+	 * @return the card's suit
 	 */
 	public String getSuit(){
 		return suit;
@@ -128,8 +128,16 @@ public class Card {
 	 * @return the flippy card value
 	 */
 	public int getFlippyCardValue(){
-		//TODO: Fill in good stuff here!
-		return 0;
+		if (number == 1) { ///if the number is 1, its an ace and should return the value of 11 in the game
+			return 11;
+		}
+		else if (number >= 11 && number <= 13) { // if the numbers are 11-13, they're face cards and return the value of 10 in the game
+			return 10;
+		}
+		else { //otherwise, all other numbers return their own value in the game
+			return number;
+		}
+
 	}
 	
 	/**
@@ -138,7 +146,38 @@ public class Card {
 	 * @return whether or not the card is red
 	 */
 	public boolean isRedCard(){
-		//TODO: Fill in good stuff here!
-		return false;
+		
+		if (suit == "hearts" || suit == "diamonds") { //returns true if the suit is either of the two red suits
+			return true;
+		}
+		
+		return false; //false otherwise
 	}
+
+	public static void main (String[] args) {
+
+		//TESTING getFlippyCardValue
+		Card card1 = new Card(1, "hearts");
+		System.out.println(card1.getFlippyCardValue());
+
+		Card card2 = new Card(5, "spades");
+		System.out.println(card2.getFlippyCardValue());
+
+		Card card3 = new Card(11, "clubs");
+		System.out.println(card3.getFlippyCardValue());
+
+		Card card4 = new Card(12, "diamonds");
+		System.out.println(card4.getFlippyCardValue());
+
+		Card card5 = new Card(13, "hearts");
+		System.out.println(card5.getFlippyCardValue());
+
+		//TESTING isRedCard
+		System.out.println(card1.isRedCard());
+		System.out.println(card2.isRedCard());
+		System.out.println(card3.isRedCard());
+		System.out.println(card4.isRedCard());
+		System.out.println(card5.isRedCard());
+	}
+ 
 }
