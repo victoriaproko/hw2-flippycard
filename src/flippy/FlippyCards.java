@@ -128,7 +128,22 @@ public class FlippyCards {
 
 
 	//TODO: Add a toString method here!
+	@Override
+	public String toString() {
+	
+		String line = "";
 
+		for (Card card : cards) {
+			if (card.isFaceUp()) {
+				line += card.getNumber() + " of " + card.getSuit();
+			}
+			else {
+				line += "FACE-DOWN";
+			}
+			line += " | ";
+		}
+		return line;
+	}
 
 	public static void main(String[] args) {
 
@@ -136,22 +151,25 @@ public class FlippyCards {
 		FlippyCards flippyCards = new FlippyCards(5);
 
 		//TESTING getCard method
-		System.out.println(flippyCards.getCard(0));
-		System.out.println(flippyCards.getCard(1));
-		System.out.println(flippyCards.getCard(2));
-		System.out.println(flippyCards.getCard(3));
-		System.out.println(flippyCards.getCard(4));
+		// System.out.println(flippyCards.getCard(0));
+		// System.out.println(flippyCards.getCard(1));
+		// System.out.println(flippyCards.getCard(2));
+		// System.out.println(flippyCards.getCard(3));
+		// System.out.println(flippyCards.getCard(4));
 
 		//TESTING flipCard method
-		System.out.println(flippyCards.getCard(0).isFaceUp());
-		flippyCards.getCard(0).flip();
-		System.out.println(flippyCards.getCard(0).isFaceUp());
+		// System.out.println(flippyCards.getCard(0).isFaceUp());
+		// flippyCards.getCard(0).flip();
+		// System.out.println(flippyCards.getCard(0).isFaceUp());
 
-		//FLIPPING CARDS TO TEST faceUpTotal
-		flippyCards.getCard(1).flip();
-		flippyCards.getCard(2).flip();
+		//FLIPPING CARDS TO TEST faceUpTotal & faceDownTotal & toString methods
+		// flippyCards.getCard(1).flip();
+		// flippyCards.getCard(2).flip();
 		// flippyCards.getCard(3).flip();
 		// flippyCards.getCard(4).flip();
+
+		//TESTING toSting method
+		System.out.println(flippyCards);
 		//TESTING faceUpTotal
 		System.out.println("Face up total score: " + flippyCards.faceUpTotal());
 
@@ -160,9 +178,6 @@ public class FlippyCards {
 
 		//TESTING faceDownTotal
 		System.out.println("Face down total score " + flippyCards.faceDownTotal());
-
-
-
 
 		
 
